@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Trie{
+    public:
+    struct TrieNode{
+        TrieNode*children[26];
+        bool leaf=false;
+    };
+    TrieNode*Node;
+    Trie()
+    {
+        Node=new TrieNode();
+    }
+    bool search(string words)
+    {
+        TrieNode*node=Node;
+        for(auto it:words)
+        {
+            if(node->children[it-'a']==NULL) return false;
+            node=node->children[it-'a'];
+        }
+        return node->leaf;
+    }
+    void insert(string words)
+    {
+        TrieNode*node=Node;
+        for(auto it:words)
+        {
+            if(node->children[it-'a']==NULL)
+            node->children[it-'a']=new TrieNode();
+            
+            node=node->children[it-'a'];
+        }
+        node->leaf=true;
+    }
+    bool startwith(string words)
+    {
+        TrieNode*node=Node;
+        for(auto it:words)
+        {
+            if(node->children[it-'a']==NULL) return false;
+            node=node->children[it-'a'];
+        }
+        return true;
+    }
+};
+int main()
+{
+
+}
